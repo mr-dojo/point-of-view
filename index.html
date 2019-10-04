@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="main.css">
+  <title>Balanced News</title>
+</head>
+<body>
+  <header>
+    <h1>Balanced News</h1>
+  </header>
+  <main>
+    <section class="js-search-container">
+      <form>
+        <input type="text" class="js-search-input" placeholder="Search a topic" required>
+        <input type="submit" class="js-search-submit">
+      </form>
+    </section>
+    <section class="js-results-container hidden">
+      <header class="js-results-header">
+        <h2>Results for ${query}</h2>
+      </header>
+      <ul class="js-results-list">
+        <li>example result 1</li>
+        <li>example result 2</li>
+        <li>example result 3</li>
+      </ul>
+    </section>
+    <section class="js-history-container hidden">
+      <header class="js-results-header">
+        <h2>Recently searched results</h2>
+      </header>
+      <ul class="js-history-list">
+        <li>example result 1</li>
+        <li>example result 2</li>
+        <li>example result 3</li>
+      </ul>
+    </section>
+  </main>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+  crossorigin="anonymous"></script>
+  <script src="index.js"></script>
+  <footer>
+    <p>Made using the News API</p>
+  </footer>
+</body>
+</html>
