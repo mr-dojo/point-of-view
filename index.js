@@ -71,16 +71,12 @@ function resultsHTML(dataObj) {
   return listItems;
 }
 
-// function analyzeSentiment(dataObj) {
-//   console.log(dataObj.articles[0]);
-// }
-
 function handleSentimentCheck(dataObj) {
-  $('ul.js-results-list').on('click', '.js-sentiment-check', (event) => {
+  $('ul.js-results-list').off('click').on('click', 'button', event => {
     const articleNum = event.target.id
-    console.log(dataObj.articles[articleNum])
-    const testString = "test"
-    requestSentiment(testString);
+    const descriptionString = dataObj.articles[articleNum].description
+    const contentString = dataObj.articles[articleNum].content
+    requestSentiment(descriptionString + contentString);
   })
 }
 
