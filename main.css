@@ -5,3 +5,8 @@
 body {
   font-family: Arial, sans-serif;
 }
+
+.hidden {
+  visibility: hidden;
+  height: 0;
+}

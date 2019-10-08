@@ -8,14 +8,17 @@ function handleFormSubmit() {
   $('.js-searchbar').submit(event => {
     event.preventDefault();
     moveHistory();
-    const userInput = $('.js-search-input').val().toLowerCase();
-    requestNews(baseURL, userInput);
+    const query = $('.js-search-input').val().toLowerCase();
+    requestNews(baseURL, query);
   })
 }
 
 function moveHistory() {
   const listHistory = $('.js-results-list').html()
-  $('.js-history-list').append(listHistory);
+  if (listHistory !== '') {
+    $('.js-history-list').append(listHistory);
+    $('.js-history-container').removeClass('hidden');
+  }
 }
 
 function requestNews(url, query) {
@@ -45,7 +48,7 @@ function requestNews(url, query) {
         console.log("there are 0 results, search something else")
       } else { 
         DATA = JSON.stringify(responceJson);
-        renderResults(DATA);
+        renderResults(DATA, query);
       }
     })
     .catch(err => {
@@ -60,19 +63,31 @@ function formatPerams(perams) {
     return queryString;
 }
 
-function renderResults(DATA) {
+function renderResults(DATA, query) {
   const dataObj = JSON.parse(DATA);
   $('.js-results-list').empty()
   .html(resultsHTML(dataObj));
+
+  $('.js-results-header').empty()
+  .html(`<h2>Results for ${query}`)
+
+  $('.js-results-container').removeClass('hidden');
+
   handleSentimentCheck(dataObj);
-  $('.js-results-list').html(resultsHTML(dataObj));
+  
 }
 
 function resultsHTML(dataObj) {
   const listItems = []
   const data = dataObj.articles
   for (let i = 0; i < dataObj.articles.length; i++) {
-  listItems.push(`<li><img src="${data[i].urlToImage}" alt="article preview image" width="300px"><h3>${data[i].title}</h3><p>${data[i].description}</p><button id="${[i]}" class="js-sentiment-check">Check Sentiment</button></li>`)
+  listItems.push(`
+  <li>
+  <img src="${data[i].urlToImage}" alt="article preview image" width="300px">
+  <h3>${data[i].title}</h3>
+  <p>${data[i].description}</p>
+  <button id="${[i]}" class="js-sentiment-check">Check Sentiment</button>
+  <p class="sentiment-feedback hidden"></p></li>`)
   }
   return listItems;
 }
@@ -82,7 +97,16 @@ function handleSentimentCheck(dataObj) {
     const articleNum = event.target.id
     const descriptionString = dataObj.articles[articleNum].description
     const contentString = dataObj.articles[articleNum].content
-    requestSentiment(descriptionString + contentString);
+    if (descriptionString !== null && contentString !== null) {
+      requestSentiment(descriptionString + contentString);
+    } else if (descriptionString === null && contentString !== null) {
+      console.log("descriptionString is empty")
+      requestSentiment(contentString);
+    } else if (descriptionString !== null && contentString === null) {
+      console.log("contentString is empty")
+      requestSentiment(descriptionString);
+    }
+    
   })
 }
 
@@ -107,7 +131,32 @@ function requestSentiment(line) {
     .then(responce => responce.json())
     .then(responceJson => {
       console.log(responceJson)
+      renderSentiment(calculateSentiment(responceJson))
     })
+}
+
+function calculateSentiment(responceJson) {
+  const sentences = responceJson.sentences
+  const scoreArray = []
+  const magArray = []
+
+  for (let i = 0; i < sentences.length; i++) {
+    const score = sentences[i].sentiment.score
+    const magnitude = sentences[i].sentiment.magnitude
+    if (sentences[i].text.content.length >= 40) {
+      scoreArray.push(score)
+      magArray.push(magnitude)
+    }
+  }
+
+  const add = (a, b) => a + b
+  const added = scoreArray.reduce(add)
+
+  return added / scoreArray.length
+}
+
+function renderSentiment(sentiment) {
+  console.log(sentiment)
 }
 
 function handleEntitySelect() {
