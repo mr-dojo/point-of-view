@@ -19,14 +19,14 @@ function requestNews(url, query) {
     language: 'en',
     pageSize: 2,
   };
-  const options = {
+  const newsOptions = {
     headers: new Headers({
       'X-Api-Key': apiKey
     })
   };
   const queryString = formatPerams(perams)
-  const fullURL = url + search + queryString;
-  fetch(fullURL, options)
+  const newsURL = url + search + queryString;
+  fetch(newsURL, newsOptions)
     .then(responce => {
       if (responce.ok) {
         return responce.json();
@@ -58,7 +58,7 @@ function renderResults(DATA) {
   const dataObj = JSON.parse(DATA);
   $('.js-results-list').empty()
   .html(resultsHTML(dataObj));
-  analyzeSentiment(dataObj);
+  handleSentimentCheck(dataObj);
   $('.js-results-list').html(resultsHTML(dataObj));
 }
 
@@ -66,23 +66,25 @@ function resultsHTML(dataObj) {
   const listItems = []
   const data = dataObj.articles
   for (let i = 0; i < dataObj.articles.length; i++) {
-  listItems.push(`<li><img src="${data[i].urlToImage}" alt="article preview image" width="300px"><h3>${data[i].title}</h3><p>${data[i].description}</p><button class="sentiment-check">Check Sentiment</button></li>`)
+  listItems.push(`<li><img src="${data[i].urlToImage}" alt="article preview image" width="300px"><h3>${data[i].title}</h3><p>${data[i].description}</p><button id="${[i]}" class="js-sentiment-check">Check Sentiment</button></li>`)
   }
   return listItems;
 }
 
-function analyzeSentiment(dataObj) {
-  console.log(dataObj.articles[0].content);
-}
+// function analyzeSentiment(dataObj) {
+//   console.log(dataObj.articles[0]);
+// }
 
-function handleSentimentCheck() {
-  $('ul.js-results-list').on('click', '.sentiment-check', event => {
-    const testString = "On this smaller episode we’re diving into the topic of small talk. Is it there real value in shooting the breeze, or is it just inane jibber-jabber? Wherever you stand on the topic, you’re going to be called on to engage in small talk sooner or later—so how"
-    retrieveSentiment(testString);
+function handleSentimentCheck(dataObj) {
+  $('ul.js-results-list').on('click', '.js-sentiment-check', (event) => {
+    const articleNum = event.target.id
+    console.log(dataObj.articles[articleNum])
+    const testString = "test"
+    requestSentiment(testString);
   })
 }
 
-function retrieveSentiment(line) {
+function requestSentiment(line) {
   const apiKey = "AIzaSyB7d8Gu5HReab2u-UtuZTAxZYdnO4HELNc"
   const apiEndpoint = "https://language.googleapis.com/v1/documents:analyzeSentiment?key=" + apiKey;
 
@@ -114,7 +116,6 @@ function handleSortHistory() {
 
 function startApp() {
   handleFormSubmit();
-  handleSentimentCheck();
   handleEntitySelect();
   handleSortHistory();
 }
