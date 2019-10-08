@@ -7,9 +7,15 @@ const apiKey = '7ea5333e8e7c4da08923033bc7146c77'
 function handleFormSubmit() { 
   $('.js-searchbar').submit(event => {
     event.preventDefault();
+    moveHistory();
     const userInput = $('.js-search-input').val().toLowerCase();
-    requestNews(baseURL, userInput);;
+    requestNews(baseURL, userInput);
   })
+}
+
+function moveHistory() {
+  const listHistory = $('.js-results-list').html()
+  $('.js-history-list').append(listHistory);
 }
 
 function requestNews(url, query) {
