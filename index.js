@@ -84,6 +84,7 @@ function resultsHTML(dataObj) {
   <img src="${data[i].urlToImage}" alt="article preview image" width="300px">
   <h3>${data[i].title}</h3>
   <p>${data[i].description}</p>
+  <button><a href="${data[i].url}" target="_blank">Read full article</a></button>
   <button id="${[i]}" class="js-sentiment-check">Check Sentiment</button>
   </li>`)
   }
