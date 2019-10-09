@@ -1,6 +1,7 @@
 'use strict';
 
 let DATA = ''
+let sentimentCheckId = Number
 const baseURL = 'https://newsapi.org/v2/'
 const apiKey = '7ea5333e8e7c4da08923033bc7146c77'
 
@@ -84,13 +85,13 @@ function resultsHTML(dataObj) {
   <h3>${data[i].title}</h3>
   <p>${data[i].description}</p>
   <button id="${[i]}" class="js-sentiment-check">Check Sentiment</button>
-  <p class="sentiment-feedback hidden"></p></li>`)
+  </li>`)
   }
   return listItems;
 }
 
 function handleSentimentCheck(dataObj) {
-  $('ul.js-results-list').off('click').on('click', 'button', event => {
+  $('ul').off('click').on('click', 'button', event => {
     const articleNum = event.target.id
     const descriptionString = dataObj.articles[articleNum].description
     const contentString = dataObj.articles[articleNum].content
@@ -103,6 +104,7 @@ function handleSentimentCheck(dataObj) {
       console.log("contentString is empty")
       requestSentiment(descriptionString);
     }
+    sentimentCheckId = articleNum
     
   })
 }
@@ -125,7 +127,6 @@ function requestSentiment(line) {
   fetch(apiEndpoint, nlOptions)
     .then(responce => responce.json())
     .then(responceJson => {
-      console.log(responceJson)
       renderSentiment(calculateSentiment(responceJson))
     })
 }
@@ -134,33 +135,77 @@ function calculateSentiment(responceJson) {
   const sentences = responceJson.sentences
   const scoreArray = []
   const magArray = []
+  const add = (a, b) => a + b
   for (let i = 0; i < sentences.length; i++) {
-    const score = sentences[i].sentiment.score
-    const magnitude = sentences[i].sentiment.magnitude
+    const sentenceScore = sentences[i].sentiment.score
+    const sentenceMagnitude = sentences[i].sentiment.magnitude
     if (sentences[i].text.content.length >= 40) {
-      scoreArray.push(score)
-      magArray.push(magnitude)
+      scoreArray.push(sentenceScore)
+      magArray.push(sentenceMagnitude)
     }
   }
-  const add = (a, b) => a + b
-  const scoreSum = scoreArray.reduce(add)
-  return scoreSum / scoreArray.length
+  const magnitudeSum = magArray.reduce(add);
+  const scoreSum = scoreArray.reduce(add);
+  const articleMagnitude = magnitudeSum / magArray.length
+  const articleSentiment = scoreSum / scoreArray.length
+  const sentimentNumber = findSentimentNum(articleSentiment);
+  const magnitudeString = findMagnitude(articleMagnitude);
+  return [sentimentNumber, magnitudeString]
 }
 
-function renderSentiment(sentiment) {
-  console.log(sentiment)
+function findSentimentNum(articleSentiment) {
+  let sentimentResult = 0
+  if (articleSentiment <= -.25) {
+    sentimentResult = 1
+  } else if (articleSentiment > -.25 && articleSentiment < .25) {
+    sentimentResult = 2
+  } else if (articleSentiment >= .25) {
+    sentimentResult = 3
+  } else {
+    console.log("error in sentiment calculations");
+  }
+  return sentimentResult
 }
 
-function handleEntitySelect() {
+function findMagnitude(articleMagnitude) {
+  let magnitudeResult = Number
+  if (articleMagnitude <= .25) {
+    magnitudeResult = 0
+  } else if (articleMagnitude > .25 && articleMagnitude < .4) {
+    magnitudeResult = 1
+  } else if (articleMagnitude >= .4) {
+    magnitudeResult = 2
+  } else {
+    console.log("error in sentiment calculations");
+  }
+  return magnitudeResult
 }
 
-function handleSortHistory() {
+function renderSentiment(sentimentData) {
+  let  magnitudeText = ''
+  const sentiment = sentimentData[0]
+  const magnitude = sentimentData[1]
+  if (sentiment === 1 && magnitude === 1) {
+    magnitudeText = 'slightly'
+    $(`#${sentimentCheckId}`).after(`<p class="sentiment-feedback">Article seems to be ${magnitudeText} NEGATIVE</p>`)
+  } else if (sentiment === 1 && magnitude === 2) {
+    magnitudeText = 'strongly'
+    $(`#${sentimentCheckId}`).after(`<p class="sentiment-feedback">Article seems to be ${magnitudeText} NEGATIVE</p>`)
+  } else if (sentiment === 2 && magnitude === 0) {
+    $(`#${sentimentCheckId}`).after(`<p class="sentiment-feedback">Article seems to be NEUTRAL</p>`)   
+  } else if (sentiment === 2 && magnitude > 0) {
+    $(`#${sentimentCheckId}`).after(`<p class="sentiment-feedback">Article seems to be MIXED</p>`) 
+  } else if (sentiment === 3 && magnitude === 1) {
+    magnitudeText = 'slightly'
+    $(`#${sentimentCheckId}`).after(`<p class="sentiment-feedback">Article seems to be ${magnitudeText} POSITIVE</p>`)
+  } else if (sentiment === 3 && magnitude === 2) {
+    magnitudeText = 'strongly'
+    $(`#${sentimentCheckId}`).after(`<p class="sentiment-feedback">Article seems to be ${magnitudeText} POSITIVE</p>`)
+  } 
 }
 
 function startApp() {
   handleFormSubmit();
-  handleEntitySelect();
-  handleSortHistory();
 }
 
 $(startApp);
