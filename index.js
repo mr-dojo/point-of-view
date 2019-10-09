@@ -7,8 +7,8 @@ const apiKey = '7ea5333e8e7c4da08923033bc7146c77'
 function handleFormSubmit() { 
   $('.js-searchbar').submit(event => {
     event.preventDefault();
-    moveHistory();
     const query = $('.js-search-input').val().toLowerCase();
+    moveHistory();
     requestNews(baseURL, query);
   })
 }
@@ -67,12 +67,9 @@ function renderResults(DATA, query) {
   const dataObj = JSON.parse(DATA);
   $('.js-results-list').empty()
   .html(resultsHTML(dataObj));
-
   $('.js-results-header').empty()
   .html(`<h2>Results for ${query}`)
-
   $('.js-results-container').removeClass('hidden');
-
   handleSentimentCheck(dataObj);
   
 }
@@ -113,7 +110,6 @@ function handleSentimentCheck(dataObj) {
 function requestSentiment(line) {
   const apiKey = "AIzaSyB7d8Gu5HReab2u-UtuZTAxZYdnO4HELNc"
   const apiEndpoint = "https://language.googleapis.com/v1/documents:analyzeSentiment?key=" + apiKey;
-
   const nlOptions = {
     'method': 'post',
     'contentType': 'application/json',
@@ -126,7 +122,6 @@ function requestSentiment(line) {
         'encodingType': 'UTF8',
     })
   };
-
   fetch(apiEndpoint, nlOptions)
     .then(responce => responce.json())
     .then(responceJson => {
@@ -139,7 +134,6 @@ function calculateSentiment(responceJson) {
   const sentences = responceJson.sentences
   const scoreArray = []
   const magArray = []
-
   for (let i = 0; i < sentences.length; i++) {
     const score = sentences[i].sentiment.score
     const magnitude = sentences[i].sentiment.magnitude
@@ -148,11 +142,9 @@ function calculateSentiment(responceJson) {
       magArray.push(magnitude)
     }
   }
-
   const add = (a, b) => a + b
-  const added = scoreArray.reduce(add)
-
-  return added / scoreArray.length
+  const scoreSum = scoreArray.reduce(add)
+  return scoreSum / scoreArray.length
 }
 
 function renderSentiment(sentiment) {
