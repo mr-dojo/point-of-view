@@ -27,7 +27,7 @@ function requestNews(url, query) {
   const perams = {
     q: query,
     language: 'en',
-    pageSize: 2,
+    pageSize: 10,
   };
   const newsOptions = {
     headers: new Headers({
