@@ -9,6 +9,7 @@ function handleFormSubmit() {
   $('.js-searchbar').submit(event => {
     event.preventDefault();
     const query = $('.js-search-input').val().toLowerCase();
+    $('.js-search-input').val('');
     moveHistory();
     requestNews(baseURL, query);
   })
@@ -80,12 +81,16 @@ function resultsHTML(dataObj) {
   const data = dataObj.articles
   for (let i = 0; i < dataObj.articles.length; i++) {
   listItems.push(`
-  <li>
-  <img src="${data[i].urlToImage}" alt="article preview image" width="300px">
-  <h3>${data[i].title}</h3>
-  <p>${data[i].description}</p>
-  <button><a href="${data[i].url}" target="_blank">Read full article</a></button>
-  <button id="${[i]}" class="js-sentiment-check">Check Sentiment</button>
+  <li class="list-item">
+    <div class="image-box">
+      <img src="${data[i].urlToImage}" alt="article preview image" width="300px">
+    </div>
+    <h3 class="title">${data[i].title}</h3>
+    <p class="description">${data[i].description}</p>
+    <div class="sentiment-link-buttons">
+      <button class="left-button"><a href="${data[i].url}" target="_blank">READ<br>FULL<br>ARTICLE</a></button>
+      <button id="${[i]}" class="js-sentiment-check right-button">CHECK<br>SENTIMENT</button>
+    </div>
   </li>`)
   }
   return listItems;
@@ -188,20 +193,20 @@ function renderSentiment(sentimentData) {
   const magnitude = sentimentData[1]
   if (sentiment === 1 && magnitude === 1) {
     magnitudeText = 'slightly'
-    $(`#${sentimentCheckId}`).after(`<p class="sentiment-feedback">Article seems to be ${magnitudeText} NEGATIVE</p>`)
+    $(`#${sentimentCheckId}`).before(`<p class="sentiment-feedback">Article seems to be <i>${magnitudeText}</i><br> <span>NEGATIVE</span></p>`)
   } else if (sentiment === 1 && magnitude === 2) {
     magnitudeText = 'strongly'
-    $(`#${sentimentCheckId}`).after(`<p class="sentiment-feedback">Article seems to be ${magnitudeText} NEGATIVE</p>`)
+    $(`#${sentimentCheckId}`).before(`<p class="sentiment-feedback">Article seems to be <i>${magnitudeText}</i><br> <span>NEGATIVE</span></p>`)
   } else if (sentiment === 2 && magnitude === 0) {
-    $(`#${sentimentCheckId}`).after(`<p class="sentiment-feedback">Article seems to be NEUTRAL</p>`)   
+    $(`#${sentimentCheckId}`).before(`<p class="sentiment-feedback">Article seems to be<br> <span>NEUTRAL</span></p>`)   
   } else if (sentiment === 2 && magnitude > 0) {
-    $(`#${sentimentCheckId}`).after(`<p class="sentiment-feedback">Article seems to be MIXED</p>`) 
+    $(`#${sentimentCheckId}`).before(`<p class="sentiment-feedback">Article seems to be<br> <span>MIXED</span></p>`) 
   } else if (sentiment === 3 && magnitude === 1) {
     magnitudeText = 'slightly'
-    $(`#${sentimentCheckId}`).after(`<p class="sentiment-feedback">Article seems to be ${magnitudeText} POSITIVE</p>`)
+    $(`#${sentimentCheckId}`).before(`<p class="sentiment-feedback">Article seems to be <i>${magnitudeText}</i><br> <span>POSITIVE</span></p>`)
   } else if (sentiment === 3 && magnitude === 2) {
     magnitudeText = 'strongly'
-    $(`#${sentimentCheckId}`).after(`<p class="sentiment-feedback">Article seems to be ${magnitudeText} POSITIVE</p>`)
+    $(`#${sentimentCheckId}`).before(`<p class="sentiment-feedback">Article seems to be <i>${magnitudeText}</i><br> <span>POSITIVE</span></p>`)
   } 
 }
 
