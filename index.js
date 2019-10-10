@@ -9,6 +9,7 @@ function handleFormSubmit() {
   $('.js-searchbar').submit(event => {
     event.preventDefault();
     const query = $('.js-search-input').val().toLowerCase();
+    $('.js-search-input').val('');
     moveHistory();
     requestNews(baseURL, query);
   })

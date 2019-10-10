@@ -7,8 +7,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   line-height: 1.5;
+  background-color: #F2F1EF;
 }
 
 main {
@@ -129,15 +130,23 @@ a {
 
 h1 {
   margin-top: 30px;
+  font-family: 'IM Fell English SC', serif;
+  font-size: 45px;
+}
+
+h2 {
+  font-family: 'IM Fell English SC', serif;
 }
 
 h3 {
+  
   width: 100%;
   text-align: center;
   padding: 15px;
 }
 
 h3.title {
+  font-family: 'IM Fell English SC', serif;
   padding-top: 60px;
 }
 
