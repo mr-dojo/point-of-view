@@ -28,15 +28,11 @@ header {
 section.search-container {
   height: 400px;
   width: 100%;
-  background-image: url('../balanced_news/images/skyline.png');
+  background-image: url('../balancedcomm_news/images/skyline.png');
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
   border: 5px solid green;
-}
-
-form {
-  
 }
 
 input.search-input {
