@@ -84,11 +84,11 @@ function resultsHTML(dataObj) {
     <div class="image-box">
       <img src="${data[i].urlToImage}" alt="article preview image" width="300px">
     </div>
-    <h3>${data[i].title}</h3>
+    <h3 class="title">${data[i].title}</h3>
     <p class="description">${data[i].description}</p>
     <div class="sentiment-link-buttons">
-      <button class="left-button"><a href="${data[i].url}" target="_blank">READ FULL ARTICLE</a></button>
-      <button id="${[i]}" class="js-sentiment-check right-button">CHECK SENTIMENT</button>
+      <button class="left-button"><a href="${data[i].url}" target="_blank">READ<br>FULL<br>ARTICLE</a></button>
+      <button id="${[i]}" class="js-sentiment-check right-button">CHECK<br>SENTIMENT</button>
     </div>
   </li>`)
   }
