@@ -7,15 +7,16 @@
   <link rel="stylesheet" href="main.css">
   <title>Balanced News</title>
 </head>
-<body>
-  <header>
+<body class="body">
+  <header class="center">
     <h1>Balanced News</h1>
+    <h3>Find news articles and check the authors sentiment on the topic</h3>
   </header>
-  <main>
-    <section class="js-search-container">
-      <form class="js-searchbar">
-        <input type="text" class="js-search-input" placeholder="Search a topic" required>
-        <input type="submit" class="js-search-submit">
+  <main class="center">
+    <section class="js-search-container search-container center">
+      <form class="js-searchbar center">
+        <input type="text" class="js-search-input search-input" placeholder="Search a topic" required>
+        <input type="submit" class="js-search-submit search-submit">
       </form>
     </section>
     <section class="js-results-container hidden">
@@ -25,8 +26,8 @@
       </ul>
     </section>
     <section class="js-history-container hidden">
-      <header class="js-results-header">
-        <h2>Recently searched results</h2>
+      <header class="js-history-header">
+        <h2>Recently searched articles</h2>
       </header>
       <ul class="js-history-list">
       </ul>
