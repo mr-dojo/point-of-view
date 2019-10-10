@@ -28,7 +28,7 @@ header {
 section.search-container {
   height: 400px;
   width: 100%;
-  background-image: url('/images/skyline.png');
+  background-image: url('../balanced_news/images/skyline.png');
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
