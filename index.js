@@ -89,9 +89,11 @@ function resultsHTML(dataObj) {
         <h3 class="title">${data[i].title}</h3>
         <img src="${data[i].urlToImage}" alt="article preview image" width="300px">
       </div>
-      <p id="${[i]}" class="js-sentiment-check sentiment-check">CHECK SENTIMENT</p>
+      <div>
+        <p id="${[i]}" class="js-sentiment-check sentiment-check">CHECK SENTIMENT</p>
+      </div>
       <p class="description">${data[i].description}</p>
-      <a class="full-article center" href="${data[i].url}" target="_blank">Read full article..</a>
+      <a class="full-article" href="${data[i].url}" target="_blank">Read full article..</a>
     </div>
   </li>`)
   }
@@ -195,21 +197,31 @@ function renderSentiment(sentimentData) {
   const magnitude = sentimentData[1]
   if (sentiment === 1 && magnitude === 1) {
     magnitudeText = 'slightly'
-    $(`#${sentimentCheckId}`).replaceWith(`<p class="sentiment-feedback">Article seems to be <i>${magnitudeText}</i><br> <span>NEGATIVE</span></p>`)
+    $(`#${sentimentCheckId}`).html(`Article seems to be<br><i>${magnitudeText}</i>&nbsp;<span>NEGATIVE</span>`)
+    borderColor('slightly-negative');
   } else if (sentiment === 1 && magnitude === 2) {
     magnitudeText = 'strongly'
-    $(`#${sentimentCheckId}`).replaceWith(`<p class="sentiment-feedback">Article seems to be <i>${magnitudeText}</i><br> <span>NEGATIVE</span></p>`)
+    $(`#${sentimentCheckId}`).html(`Article seems to be<br><i>${magnitudeText}</i>&nbsp;<span>NEGATIVE</span>`)
+    borderColor('strongly-negative');
   } else if (sentiment === 2 && magnitude === 0) {
-    $(`#${sentimentCheckId}`).replaceWith(`<p class="sentiment-feedback">Article seems to be<br> <span>NEUTRAL</span></p>`)   
+    $(`#${sentimentCheckId}`).html("Article seems to be<br> <span>NEUTRAL</span></p>") 
+    borderColor('neutral'); 
   } else if (sentiment === 2 && magnitude > 0) {
-    $(`#${sentimentCheckId}`).replaceWith(`<p class="sentiment-feedback">Article seems to be<br> <span>MIXED</span></p>`) 
+    $(`#${sentimentCheckId}`).html("Article seems to be<br> <span>MIXED</span>")
+    borderColor('mixed');
   } else if (sentiment === 3 && magnitude === 1) {
     magnitudeText = 'slightly'
-    $(`#${sentimentCheckId}`).replaceWith(`<p class="sentiment-feedback">Article seems to be <i>${magnitudeText}</i><br> <span>POSITIVE</span></p>`)
+    $(`#${sentimentCheckId}`).html(`Article seems to be<br><i>${magnitudeText}</i>&nbsp;<span>POSITIVE</span>`)
+    borderColor('slightly-positive');
   } else if (sentiment === 3 && magnitude === 2) {
     magnitudeText = 'strongly'
-    $(`#${sentimentCheckId}`).replaceWith(`<p class="sentiment-feedback">Article seems to be <i>${magnitudeText}</i><br> <span>POSITIVE</span></p>`)
+    $(`#${sentimentCheckId}`).html(`Article seems to be<br><i>${magnitudeText}</i>&nbsp;<span>POSITIVE</span>`)
+    borderColor('strongly-positive');
   } 
+}
+
+function borderColor(magnitude) {
+  $(`#${sentimentCheckId}`).addClass(magnitude) 
 }
 
 function startApp() {

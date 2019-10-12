@@ -18,6 +18,8 @@ main {
 }
 
 header {
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 100%;
   flex-direction: column;
@@ -28,7 +30,7 @@ div.header-container {
   margin-top: 5vh;
   width: 90%;
   max-width: 700px;
-  border: 2px solid #2E2E2E;
+  border: 2px solid #9E9880;
 }
 
 h3.header-about {
@@ -37,12 +39,20 @@ h3.header-about {
 }
 
 section.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 150px;
   width: 100%;
 }
 
 input.search-input {
   width: 200px;
+}
+
+input.search-submit {
+  background-color: #70729E;
+  color: #FFFFFF;
 }
 
 input.search-input, input.search-submit {
@@ -64,11 +74,16 @@ li {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 30px;
 }
 
 div.list-item-content { 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 90%;
-  border: 2px solid #2E2E2E; 
+  border: 2px solid #9E9880;
+  padding: 15px;
 }
 
 img {
@@ -92,9 +107,12 @@ p.description {
 }
 
 p.sentiment-check {
+  background-color: #70729E;
+  color: #FFFFFF;
   text-align: center;
-  padding: 5px;
-  border: 2px solid #2E2E2E; 
+  padding: 10px;
+  border: 2px solid black;
+  border-style: outset;
 }
 
 span {
@@ -114,7 +132,7 @@ footer {
 }
 
 a.full-article {
-  text-decoration: none;
+  margin-bottom: 15px;
 }
 
 h1 {
@@ -133,37 +151,42 @@ h3 {
   text-align: left;
 }
 
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .hidden {
   visibility: hidden;
   height: 0;
 }
 
-.slightly-negative {
-  border-color: #F7331D;
+p.slightly-negative {
+  border: 3px solid #F7331D;
+  border-style: inset;
 }
 
-.strongly-negative {
-  border-color: #8B0101;
+p.strongly-negative {
+  border: 3px solid #8B0101;
+  border-style: inset;
+
 }
 
-.neutral {
-  border-color: grey;
+p.neutral {
+  border: 3px solid #FFFFFF;
+  border-style: inset;
+
 }
 
-.mixed {
-  border-color: #1BA8F0;
+p.mixed {
+  border: 3px solid #1BA8F0;
+  border-style: inset;
+
 }
 
-.slightly-positive {
-  border-color: #E7F7CB;
+p.slightly-positive {
+  border: 3px solid #E7F7CB;
+  border-style: inset;
+
 }
 
-.strongly-positive {
-  border-color: green;
+p.strongly-positive {
+  border: 3px solid green;
+  border-style: inset;
+
 }
