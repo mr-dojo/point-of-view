@@ -8,17 +8,19 @@ const apiKey = '7ea5333e8e7c4da08923033bc7146c77'
 function handleFormSubmit() { 
   $('.js-searchbar').submit(event => {
     event.preventDefault();
+    const listHistory = $('.js-results-container').html()
+    moveHistory(listHistory);
     const query = $('.js-search-input').val().toLowerCase();
     $('.js-search-input').val('');
-    moveHistory();
     requestNews(baseURL, query);
   })
 }
 
-function moveHistory() {
-  const listHistory = $('.js-results-list').html()
-  if (listHistory !== '') {
-    $('.js-history-list').append(listHistory);
+function moveHistory(listHistory) {
+  if ($.trim($(".js-results-list").html()) !== '') {
+    console.log("worked")
+    console.log(listHistory)
+    $('.js-history-container').append(listHistory);
     $('.js-history-container').removeClass('hidden');
   }
 }
@@ -70,7 +72,7 @@ function renderResults(DATA, query) {
   $('.js-results-list').empty()
   .html(resultsHTML(dataObj));
   $('.js-results-header').empty()
-  .html(`<h2>Results for ${query}`)
+  .html(`<h2>Results for "${query}"`)
   $('.js-results-container').removeClass('hidden');
   handleSentimentCheck(dataObj);
   
@@ -81,15 +83,15 @@ function resultsHTML(dataObj) {
   const data = dataObj.articles
   for (let i = 0; i < dataObj.articles.length; i++) {
   listItems.push(`
-  <li class="list-item">
-    <div class="image-box">
-      <img src="${data[i].urlToImage}" alt="article preview image" width="300px">
-    </div>
-    <h3 class="title">${data[i].title}</h3>
-    <p class="description">${data[i].description}</p>
-    <div class="sentiment-link-buttons">
-      <button class="left-button"><a href="${data[i].url}" target="_blank">READ<br>FULL<br>ARTICLE</a></button>
-      <button id="${[i]}" class="js-sentiment-check right-button">CHECK<br>SENTIMENT</button>
+  <li>
+    <div class="list-item-content">
+      <div class="image-box">
+        <h3 class="title">${data[i].title}</h3>
+        <img src="${data[i].urlToImage}" alt="article preview image" width="300px">
+      </div>
+      <p id="${[i]}" class="js-sentiment-check sentiment-check">CHECK SENTIMENT</p>
+      <p class="description">${data[i].description}</p>
+      <a class="full-article center" href="${data[i].url}" target="_blank">Read full article..</a>
     </div>
   </li>`)
   }
@@ -97,7 +99,7 @@ function resultsHTML(dataObj) {
 }
 
 function handleSentimentCheck(dataObj) {
-  $('ul').off('click').on('click', 'button', event => {
+  $('ul').off('click').on('click', '.sentiment-check', event => {
     const articleNum = event.target.id
     const descriptionString = dataObj.articles[articleNum].description
     const contentString = dataObj.articles[articleNum].content
@@ -193,20 +195,20 @@ function renderSentiment(sentimentData) {
   const magnitude = sentimentData[1]
   if (sentiment === 1 && magnitude === 1) {
     magnitudeText = 'slightly'
-    $(`#${sentimentCheckId}`).before(`<p class="sentiment-feedback">Article seems to be <i>${magnitudeText}</i><br> <span>NEGATIVE</span></p>`)
+    $(`#${sentimentCheckId}`).replaceWith(`<p class="sentiment-feedback">Article seems to be <i>${magnitudeText}</i><br> <span>NEGATIVE</span></p>`)
   } else if (sentiment === 1 && magnitude === 2) {
     magnitudeText = 'strongly'
-    $(`#${sentimentCheckId}`).before(`<p class="sentiment-feedback">Article seems to be <i>${magnitudeText}</i><br> <span>NEGATIVE</span></p>`)
+    $(`#${sentimentCheckId}`).replaceWith(`<p class="sentiment-feedback">Article seems to be <i>${magnitudeText}</i><br> <span>NEGATIVE</span></p>`)
   } else if (sentiment === 2 && magnitude === 0) {
-    $(`#${sentimentCheckId}`).before(`<p class="sentiment-feedback">Article seems to be<br> <span>NEUTRAL</span></p>`)   
+    $(`#${sentimentCheckId}`).replaceWith(`<p class="sentiment-feedback">Article seems to be<br> <span>NEUTRAL</span></p>`)   
   } else if (sentiment === 2 && magnitude > 0) {
-    $(`#${sentimentCheckId}`).before(`<p class="sentiment-feedback">Article seems to be<br> <span>MIXED</span></p>`) 
+    $(`#${sentimentCheckId}`).replaceWith(`<p class="sentiment-feedback">Article seems to be<br> <span>MIXED</span></p>`) 
   } else if (sentiment === 3 && magnitude === 1) {
     magnitudeText = 'slightly'
-    $(`#${sentimentCheckId}`).before(`<p class="sentiment-feedback">Article seems to be <i>${magnitudeText}</i><br> <span>POSITIVE</span></p>`)
+    $(`#${sentimentCheckId}`).replaceWith(`<p class="sentiment-feedback">Article seems to be <i>${magnitudeText}</i><br> <span>POSITIVE</span></p>`)
   } else if (sentiment === 3 && magnitude === 2) {
     magnitudeText = 'strongly'
-    $(`#${sentimentCheckId}`).before(`<p class="sentiment-feedback">Article seems to be <i>${magnitudeText}</i><br> <span>POSITIVE</span></p>`)
+    $(`#${sentimentCheckId}`).replaceWith(`<p class="sentiment-feedback">Article seems to be <i>${magnitudeText}</i><br> <span>POSITIVE</span></p>`)
   } 
 }
 

@@ -9,7 +9,7 @@ body {
   align-items: center;
   font-family: 'Open Sans', sans-serif;
   line-height: 1.5;
-  background-color: #F2F1EF;
+  background-color: #EAE6D6;
 }
 
 main {
@@ -24,14 +24,21 @@ header {
   text-align: center;
 }
 
+div.header-container {
+  margin-top: 5vh;
+  width: 90%;
+  max-width: 700px;
+  border: 2px solid #2E2E2E;
+}
+
+h3.header-about {
+  text-align: center;
+  padding: 15px;
+}
+
 section.search-container {
-  height: 300px;
+  height: 150px;
   width: 100%;
-  background-image: url("images/skyline.png");
-  background-repeat: no-repeat;
-  background-position: bottom;
-  background-size: contain;
-  margin-bottom: 30px;
 }
 
 input.search-input {
@@ -46,66 +53,48 @@ input.search-input, input.search-submit {
 
 ul {
   list-style: none;
-  padding-inline-start: 0px;
+  /* padding-inline-start: 0px; */
+  padding: 0px;
+  margin: 0px;
   margin-top: 30px;
 }
 
-li.list-item {
+li {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 30px;
 }
 
-div.image-box {
-  width: 100%;
-  height: 200px;
+div.list-item-content { 
+  width: 90%;
+  border: 2px solid #2E2E2E; 
 }
 
 img {
-  width: 100%;
-  height: 100%;
+  width: 125px;
+  height: 125px;
   object-fit: cover;
+  padding: 15px 15px 15px 0px;
+
 }
+
+div.image-box {
+  display: flex;
+  align-items: center;
+}
+
+
 
 p.description {
-  padding: 0px 15px 15px 15px;
-}
-
-div.sentiment-link-buttons {
-  width: 100%;
-  height: 110px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-button {
-  max-width: 150px;
-  border: none;
-  height: 80px;
-  background-color: white;
+  padding: 15px;
   font-size: 14px;
-  flex: 1 0 33.33%;
 }
 
-button.left-button {
-  border-radius:  0px 30px 30px 0px;
-  padding: 0px 30px 0px 15px;
-  box-shadow: -3px 3px 3px 1px grey;
-}
-
-button.right-button {
-  border-radius:  30px 0px 0px 30px;
-  padding: 0px 15px 0px 30px;
-  box-shadow: 3px 3px 3px 1px grey;
-}
-
-p.sentiment-feedback {
+p.sentiment-check {
   text-align: center;
-  font-size: 12px;
-  padding: 0px 20px 20px 20px;
+  padding: 5px;
+  border: 2px solid #2E2E2E; 
 }
 
 span {
@@ -124,30 +113,24 @@ footer {
   left: 5px;
 }
 
-a {
+a.full-article {
   text-decoration: none;
 }
 
 h1 {
-  margin-top: 30px;
-  font-family: 'IM Fell English SC', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 45px;
 }
 
 h2 {
-  font-family: 'IM Fell English SC', serif;
+  font-family: 'Playfair Display', serif;
 }
 
 h3 {
-  
   width: 100%;
   text-align: center;
   padding: 15px;
-}
-
-h3.title {
-  font-family: 'IM Fell English SC', serif;
-  padding-top: 60px;
+  text-align: left;
 }
 
 .center {
@@ -159,4 +142,28 @@ h3.title {
 .hidden {
   visibility: hidden;
   height: 0;
+}
+
+.slightly-negative {
+  border-color: #F7331D;
+}
+
+.strongly-negative {
+  border-color: #8B0101;
+}
+
+.neutral {
+  border-color: grey;
+}
+
+.mixed {
+  border-color: #1BA8F0;
+}
+
+.slightly-positive {
+  border-color: #E7F7CB;
+}
+
+.strongly-positive {
+  border-color: green;
 }
