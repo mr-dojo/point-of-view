@@ -5,17 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="main.css">
-  <link href="https://fonts.googleapis.com/css?family=IM+Fell+English+SC|Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Playfair+Display&display=swap" rel="stylesheet">
+
   <title>Balanced News</title>
 </head>
 <body class="body">
-  <header class="center">
-    <h1>Balanced News</h1>
-    <h3>Find news articles and check the authors sentiment on the topic</h3>
+  <header>
+    <div class="header-container">
+      <h1>Balanced News</h1>
+      <h3 class="header-about">Find news articles and check the authors sentiment on the topic</h3>
+    </div>
   </header>
-  <main class="center">
-    <section class="js-search-container search-container center">
-      <form class="js-searchbar center">
+  <main>
+    <section class="js-search-container search-container">
+      <form class="js-searchbar">
         <input type="text" class="js-search-input search-input" placeholder="Search a topic" required>
         <input type="submit" class="js-search-submit search-submit">
       </form>
@@ -23,15 +26,9 @@
     <section class="js-results-container hidden">
       <header class="js-results-header">
       </header>
-      <ul class="js-results-list list">
-      </ul>
+      <ul class="js-results-list list"></ul>
     </section>
     <section class="js-history-container hidden">
-      <header class="js-history-header">
-        <h2>Recently searched articles</h2>
-      </header>
-      <ul class="js-history-list">
-      </ul>
     </section>
   </main>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

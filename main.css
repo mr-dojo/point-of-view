@@ -9,7 +9,7 @@ body {
   align-items: center;
   font-family: 'Open Sans', sans-serif;
   line-height: 1.5;
-  background-color: #F2F1EF;
+  background-color: #EAE6D6;
 }
 
 main {
@@ -18,24 +18,41 @@ main {
 }
 
 header {
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 100%;
   flex-direction: column;
   text-align: center;
 }
 
+div.header-container {
+  margin-top: 5vh;
+  width: 90%;
+  max-width: 700px;
+  border: 2px solid #9E9880;
+}
+
+h3.header-about {
+  text-align: center;
+  padding: 15px;
+}
+
 section.search-container {
-  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
   width: 100%;
-  background-image: url("images/skyline.png");
-  background-repeat: no-repeat;
-  background-position: bottom;
-  background-size: contain;
-  margin-bottom: 30px;
 }
 
 input.search-input {
   width: 200px;
+}
+
+input.search-submit {
+  background-color: #70729E;
+  color: #FFFFFF;
 }
 
 input.search-input, input.search-submit {
@@ -46,66 +63,56 @@ input.search-input, input.search-submit {
 
 ul {
   list-style: none;
-  padding-inline-start: 0px;
+  /* padding-inline-start: 0px; */
+  padding: 0px;
+  margin: 0px;
   margin-top: 30px;
 }
 
-li.list-item {
+li {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 30px;
 }
 
-div.image-box {
-  width: 100%;
-  height: 200px;
+div.list-item-content { 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  border: 2px solid #9E9880;
+  padding: 15px;
 }
 
 img {
-  width: 100%;
-  height: 100%;
+  width: 125px;
+  height: 125px;
   object-fit: cover;
+  padding: 15px 15px 15px 0px;
+
 }
+
+div.image-box {
+  display: flex;
+  align-items: center;
+}
+
+
 
 p.description {
-  padding: 0px 15px 15px 15px;
-}
-
-div.sentiment-link-buttons {
-  width: 100%;
-  height: 110px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-button {
-  max-width: 150px;
-  border: none;
-  height: 80px;
-  background-color: white;
+  padding: 15px;
   font-size: 14px;
-  flex: 1 0 33.33%;
 }
 
-button.left-button {
-  border-radius:  0px 30px 30px 0px;
-  padding: 0px 30px 0px 15px;
-  box-shadow: -3px 3px 3px 1px grey;
-}
-
-button.right-button {
-  border-radius:  30px 0px 0px 30px;
-  padding: 0px 15px 0px 30px;
-  box-shadow: 3px 3px 3px 1px grey;
-}
-
-p.sentiment-feedback {
+p.sentiment-check {
+  background-color: #70729E;
+  color: #FFFFFF;
   text-align: center;
-  font-size: 12px;
-  padding: 0px 20px 20px 20px;
+  padding: 10px;
+  border: 2px solid black;
+  border-style: outset;
 }
 
 span {
@@ -124,39 +131,62 @@ footer {
   left: 5px;
 }
 
-a {
-  text-decoration: none;
+a.full-article {
+  margin-bottom: 15px;
 }
 
 h1 {
-  margin-top: 30px;
-  font-family: 'IM Fell English SC', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 45px;
 }
 
 h2 {
-  font-family: 'IM Fell English SC', serif;
+  font-family: 'Playfair Display', serif;
 }
 
 h3 {
-  
   width: 100%;
   text-align: center;
   padding: 15px;
-}
-
-h3.title {
-  font-family: 'IM Fell English SC', serif;
-  padding-top: 60px;
-}
-
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: left;
 }
 
 .hidden {
   visibility: hidden;
   height: 0;
+}
+
+p.slightly-negative {
+  border: 3px solid #F7331D;
+  border-style: inset;
+}
+
+p.strongly-negative {
+  border: 3px solid #8B0101;
+  border-style: inset;
+
+}
+
+p.neutral {
+  border: 3px solid #FFFFFF;
+  border-style: inset;
+
+}
+
+p.mixed {
+  border: 3px solid #1BA8F0;
+  border-style: inset;
+
+}
+
+p.slightly-positive {
+  border: 3px solid #E7F7CB;
+  border-style: inset;
+
+}
+
+p.strongly-positive {
+  border: 3px solid green;
+  border-style: inset;
+
 }
