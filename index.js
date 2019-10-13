@@ -18,8 +18,6 @@ function handleFormSubmit() {
 
 function moveHistory(listHistory) {
   if ($.trim($(".js-results-list").html()) !== '') {
-    console.log("worked")
-    console.log(listHistory)
     $('.js-history-container').append(listHistory);
     $('.js-history-container').removeClass('hidden');
   }
@@ -49,6 +47,7 @@ function requestNews(url, query) {
     })
     .then(responceJson => {
       if (responceJson.totalResults === 0) {
+        //create an error message for the user
         console.log("there are 0 results, search something else")
       } else { 
         DATA = JSON.stringify(responceJson);
@@ -75,29 +74,43 @@ function renderResults(DATA, query) {
   .html(`<h2>Results for "${query}"`)
   $('.js-results-container').removeClass('hidden');
   handleSentimentCheck(dataObj);
-  
 }
 
 function resultsHTML(dataObj) {
   const listItems = []
   const data = dataObj.articles
   for (let i = 0; i < dataObj.articles.length; i++) {
-  listItems.push(`
-  <li>
-    <div class="list-item-content">
-      <div class="image-box">
-        <h3 class="title">${data[i].title}</h3>
-        <img src="${data[i].urlToImage}" alt="article preview image" width="300px">
+    listItems.push(`
+    <li>
+      <div class="list-item-content">
+        <div class="image-box">
+          <h3 class="title">${data[i].title}</h3>
+          <img src="${data[i].urlToImage}" alt="article preview image" width="300px">
+        </div>
+        <div>
+          <p id="${[i]}" class="js-sentiment-check sentiment-check">CHECK SENTIMENT</p>
+        </div>
+        <p class="description">${data[i].description}</p>
+        <div class="info-box">
+          <div class="more-info-box">
+            <p>Published by: ${data[i].source.name}</p>
+            <p>On: ${renderTime(data[i].publishedAt)}</p>
+          </div>
+          <a class="full-article" href="${data[i].url}" target="_blank">Read full article..</a>
+        </div>      
       </div>
-      <div>
-        <p id="${[i]}" class="js-sentiment-check sentiment-check">CHECK SENTIMENT</p>
-      </div>
-      <p class="description">${data[i].description}</p>
-      <a class="full-article" href="${data[i].url}" target="_blank">Read full article..</a>
-    </div>
-  </li>`)
+    </li>`)
+    // renderTime(data[i].publishedAt);
+    }
+
+    return listItems;
   }
-  return listItems;
+  
+  function renderTime(timeCode) {
+    const timeDate = timeCode.split('T')
+    const date = timeDate[0].split('-')
+    const time = timeDate[1].split(':')
+    return (`${date[1]}/${date[2]}/${date[0]}`)
 }
 
 function handleSentimentCheck(dataObj) {
