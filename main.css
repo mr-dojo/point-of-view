@@ -179,6 +179,10 @@ h3 {
   text-align: left;
 }
 
+i {
+  margin: 0px 2px;
+}
+
 .hidden {
   visibility: hidden;
   height: 0;
@@ -186,36 +190,36 @@ h3 {
 
 
 p.slightly-negative {
-  border: 3px solid #F7331D;
+  border: 2px solid #F7331D;
   border-style: inset;
 }
 
 p.strongly-negative {
-  border: 3px solid #8B0101;
+  border: 2px solid #8B0101;
   border-style: inset;
 
 }
 
 p.neutral {
-  border: 3px solid #FFFFFF;
+  border: 2px solid #FFFFFF;
   border-style: inset;
 
 }
 
 p.mixed {
-  border: 3px solid #1BA8F0;
+  border: 2px solid #1BA8F0;
   border-style: inset;
 
 }
 
 p.slightly-positive {
-  border: 3px solid #E7F7CB;
+  border: 2px solid #E7F7CB;
   border-style: inset;
 
 }
 
 p.strongly-positive {
-  border: 3px solid green;
+  border: 2px solid green;
   border-style: inset;
 
 }
@@ -253,7 +257,7 @@ p.strongly-positive {
   
   li.list-item-content { 
     width: 450px;
-    height: 460px;
+    height: 450px;
     margin-right: 20px;
     margin-left: 20px;
   }

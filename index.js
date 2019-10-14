@@ -3,7 +3,6 @@
 let DATA = ''
 let sentimentCheckId = Number
 
-
 function handleFormSubmit() { 
   $('.js-searchbar').submit(event => {
     event.preventDefault();
@@ -208,25 +207,25 @@ function renderSentiment(sentimentData) {
   const magnitude = sentimentData[1]
   if (sentiment === 1 && magnitude === 1) {
     magnitudeText = 'slightly'
-    $(`#${sentimentCheckId}`).html(`Article seems to be<br><i>${magnitudeText}</i>&nbsp;<span>NEGATIVE</span>`)
+    $(`#${sentimentCheckId}`).html(`Article seems to be <i>${magnitudeText}</i>&nbsp;<span>NEGATIVE</span>`)
     borderColor('slightly-negative');
   } else if (sentiment === 1 && magnitude === 2) {
     magnitudeText = 'strongly'
-    $(`#${sentimentCheckId}`).html(`Article seems to be<br><i>${magnitudeText}</i>&nbsp;<span>NEGATIVE</span>`)
+    $(`#${sentimentCheckId}`).html(`Article seems to be <i>${magnitudeText}</i>&nbsp;<span>NEGATIVE</span>`)
     borderColor('strongly-negative');
   } else if (sentiment === 2 && magnitude === 0) {
-    $(`#${sentimentCheckId}`).html("Article seems to be<br> <span>NEUTRAL</span></p>") 
+    $(`#${sentimentCheckId}`).html("Article seems to be <span>NEUTRAL</span></p>") 
     borderColor('neutral'); 
   } else if (sentiment === 2 && magnitude > 0) {
-    $(`#${sentimentCheckId}`).html("Article seems to be<br> <span>MIXED</span>")
+    $(`#${sentimentCheckId}`).html("Article seems to be <span>MIXED</span>")
     borderColor('mixed');
   } else if (sentiment === 3 && magnitude === 1) {
     magnitudeText = 'slightly'
-    $(`#${sentimentCheckId}`).html(`Article seems to be<br><i>${magnitudeText}</i>&nbsp;<span>POSITIVE</span>`)
+    $(`#${sentimentCheckId}`).html(`Article seems to be <i>${magnitudeText}</i>&nbsp;<span>POSITIVE</span>`)
     borderColor('slightly-positive');
   } else if (sentiment === 3 && magnitude === 2) {
     magnitudeText = 'strongly'
-    $(`#${sentimentCheckId}`).html(`Article seems to be<br><i>${magnitudeText}</i>&nbsp;<span>POSITIVE</span>`)
+    $(`#${sentimentCheckId}`).html(`Article seems to be <i>${magnitudeText}</i>&nbsp;<span>POSITIVE</span>`)
     borderColor('strongly-positive');
   } 
 }
