@@ -13,30 +13,31 @@
   <header>
     <div class="header-container">
       <h1>Balanced News</h1>
-      <h3 class="header-about">Find news articles and check the authors sentiment on the topic</h3>
+      <h3 class="header-about">Search articles from over 30,000 news sources and blogs<br><span id='and'>&</span> check if the author may have had bias while writing it</h3>
     </div>
   </header>
   <main>
     <section class="js-search-container search-container">
       <form class="js-searchbar">
         <input type="text" class="js-search-input search-input" placeholder="Search a topic" required>
-        <input type="submit" class="js-search-submit search-submit">
+        <input type="submit" class="js-search-submit search-submit" value=" ">
       </form>
     </section>
     <section class="js-results-container hidden">
       <header class="js-results-header">
       </header>
       <ul class="js-results-list list"></ul>
+      <p>Show More..</p>
     </section>
-    <section class="js-history-container hidden">
-    </section>
+    <!-- <section class="js-history-container hidden">
+    </section> -->
   </main>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
   integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
   crossorigin="anonymous"></script>
   <script src="index.js"></script>
-  <footer>
-    <p>Made using the News API</p>
+  <footer class="footer">
+    <p>Made with the News API and Cloud Natural Language API</p>
   </footer>
 </body>
 </html>
