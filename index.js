@@ -68,6 +68,7 @@ function formatPerams(perams) {
 
 function renderResults(DATA, query) {
   const dataObj = JSON.parse(DATA);
+  console.log(dataObj)
   $('.js-results-list').empty()
   .html(resultsHTML(dataObj));
   $('.js-results-header').empty()
@@ -92,7 +93,7 @@ function resultsHTML(dataObj) {
       <p class="description">${data[i].description}</p>
       <div class="info-box">
         <div class="more-info-box">
-          <p>Published by: ${data[i].source.name}</p>
+          <p>Published by: <a href="${data[i].url}">${data[i].source.name}</a></p>
           <p>On: ${renderTime(data[i].publishedAt)}</p>
         </div>
         <a class="full-article" href="${data[i].url}" target="_blank">Read full article..</a>
@@ -207,11 +208,11 @@ function renderSentiment(sentimentData) {
   const magnitude = sentimentData[1]
   if (sentiment === 1 && magnitude === 1) {
     magnitudeText = 'slightly'
-    $(`#${sentimentCheckId}`).html(`Article seems to be <i>${magnitudeText}</i>&nbsp;<span>NEGATIVE</span>`)
+    $(`#${sentimentCheckId}`).html(`Article seems to be <i>${magnitudeText}</i><span>NEGATIVE</span>`)
     borderColor('slightly-negative');
   } else if (sentiment === 1 && magnitude === 2) {
     magnitudeText = 'strongly'
-    $(`#${sentimentCheckId}`).html(`Article seems to be <i>${magnitudeText}</i>&nbsp;<span>NEGATIVE</span>`)
+    $(`#${sentimentCheckId}`).html(`Article seems to be <i>${magnitudeText}</i><span>NEGATIVE</span>`)
     borderColor('strongly-negative');
   } else if (sentiment === 2 && magnitude === 0) {
     $(`#${sentimentCheckId}`).html("Article seems to be <span>NEUTRAL</span></p>") 
@@ -221,11 +222,11 @@ function renderSentiment(sentimentData) {
     borderColor('mixed');
   } else if (sentiment === 3 && magnitude === 1) {
     magnitudeText = 'slightly'
-    $(`#${sentimentCheckId}`).html(`Article seems to be <i>${magnitudeText}</i>&nbsp;<span>POSITIVE</span>`)
+    $(`#${sentimentCheckId}`).html(`Article seems to be <i>${magnitudeText}</i><span>POSITIVE</span>`)
     borderColor('slightly-positive');
   } else if (sentiment === 3 && magnitude === 2) {
     magnitudeText = 'strongly'
-    $(`#${sentimentCheckId}`).html(`Article seems to be <i>${magnitudeText}</i>&nbsp;<span>POSITIVE</span>`)
+    $(`#${sentimentCheckId}`).html(`Article seems to be <i>${magnitudeText}</i><span>POSITIVE</span>`)
     borderColor('strongly-positive');
   } 
 }

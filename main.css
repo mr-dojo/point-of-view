@@ -179,8 +179,8 @@ h3 {
   text-align: left;
 }
 
-i {
-  margin: 0px 2px;
+p i {
+  margin-right: 3px;
 }
 
 .hidden {
