@@ -2,33 +2,34 @@
 
 let DATA = ''
 let sentimentCheckId = Number
-const baseURL = 'https://newsapi.org/v2/'
-const apiKey = '7ea5333e8e7c4da08923033bc7146c77'
+
 
 function handleFormSubmit() { 
   $('.js-searchbar').submit(event => {
     event.preventDefault();
-    const listHistory = $('.js-results-container').html()
-    moveHistory(listHistory);
+    // const listHistory = ""+$('.js-results-container').html()+"";
+    // moveHistory(listHistory);
     const query = $('.js-search-input').val().toLowerCase();
     $('.js-search-input').val('');
-    requestNews(baseURL, query);
+    requestNews(query);
   })
 }
 
-function moveHistory(listHistory) {
-  if ($.trim($(".js-results-list").html()) !== '') {
-    $('.js-history-container').append(listHistory);
-    $('.js-history-container').removeClass('hidden');
-  }
-}
+// function moveHistory(listHistory) {
+//   if ($.trim($(".js-results-list").html()) !== '') {
+//     $('.js-history-container').html(listHistory);
+//     $('.js-history-container').removeClass('hidden');
+//   }
+// }
 
-function requestNews(url, query) {
+function requestNews(query) {
+  const baseURL = 'https://newsapi.org/v2/'
+  const apiKey = '7ea5333e8e7c4da08923033bc7146c77'
   const search = 'everything?'
   const perams = {
     q: query,
     language: 'en',
-    pageSize: 5,
+    pageSize: 6,
   };
   const newsOptions = {
     headers: new Headers({
@@ -36,7 +37,7 @@ function requestNews(url, query) {
     })
   };
   const queryString = formatPerams(perams)
-  const newsURL = url + search + queryString;
+  const newsURL = baseURL + search + queryString;
   fetch(newsURL, newsOptions)
     .then(responce => {
       if (responce.ok) {
@@ -81,26 +82,23 @@ function resultsHTML(dataObj) {
   const data = dataObj.articles
   for (let i = 0; i < dataObj.articles.length; i++) {
     listItems.push(`
-    <li>
-      <div class="list-item-content">
-        <div class="image-box">
-          <h3 class="title">${data[i].title}</h3>
-          <img src="${data[i].urlToImage}" alt="article preview image" width="300px">
-        </div>
-        <div>
-          <p id="${[i]}" class="js-sentiment-check sentiment-check">CHECK SENTIMENT</p>
-        </div>
-        <p class="description">${data[i].description}</p>
-        <div class="info-box">
-          <div class="more-info-box">
-            <p>Published by: ${data[i].source.name}</p>
-            <p>On: ${renderTime(data[i].publishedAt)}</p>
-          </div>
-          <a class="full-article" href="${data[i].url}" target="_blank">Read full article..</a>
-        </div>      
+    <li class="list-item-content">
+      <div class="image-box">
+        <h3 class="title">${data[i].title}</h3>
+        <img src="${data[i].urlToImage}" alt="article preview image" width="300px">
       </div>
+      <div>
+        <p id="${[i]}" class="js-sentiment-check sentiment-check">CHECK BIAS</p>
+      </div>
+      <p class="description">${data[i].description}</p>
+      <div class="info-box">
+        <div class="more-info-box">
+          <p>Published by: ${data[i].source.name}</p>
+          <p>On: ${renderTime(data[i].publishedAt)}</p>
+        </div>
+        <a class="full-article" href="${data[i].url}" target="_blank">Read full article..</a>
+      </div>     
     </li>`)
-    // renderTime(data[i].publishedAt);
     }
 
     return listItems;
