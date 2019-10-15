@@ -82,7 +82,7 @@ function resultsHTML(dataObj) {
       <p class="description">${data[i].description}</p>
       <div class="info-box">
         <div class="more-info-box">
-          <p>Published by: <a href="${data[i].url}">${data[i].source.name}</a></p>
+          <p>Published by: <a href="${data[i].url}" target="_blank">${data[i].source.name}</a></p>
           <p>On: <span id="publish-date">${renderTime(data[i].publishedAt)}</span></p>
         </div>
         <a class="full-article" href="${data[i].url}" target="_blank">Read full article..</a>
