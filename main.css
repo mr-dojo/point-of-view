@@ -32,6 +32,19 @@ div.header-container {
   max-width: 700px;
 }
 
+div.title-and-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#header-image {
+  padding: 0px;
+  margin-left: 15px;
+  height: 45px;
+  width: 46px;
+}
+
 h3.header-about {
   text-align: center;
   padding: 15px;
@@ -41,12 +54,6 @@ span#and {
   font-size: 24px;
 }
 
-#header-image {
-  padding: 0;
-  height: 45px;
-  width: 45px;
-  
-}
 
 section.search-container {
   display: flex;
