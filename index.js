@@ -6,20 +6,11 @@ let sentimentCheckId = Number
 function handleFormSubmit() { 
   $('.js-searchbar').submit(event => {
     event.preventDefault();
-    // const listHistory = ""+$('.js-results-container').html()+"";
-    // moveHistory(listHistory);
     const query = $('.js-search-input').val().toLowerCase();
     $('.js-search-input').val('');
     requestNews(query);
   })
 }
-
-// function moveHistory(listHistory) {
-//   if ($.trim($(".js-results-list").html()) !== '') {
-//     $('.js-history-container').html(listHistory);
-//     $('.js-history-container').removeClass('hidden');
-//   }
-// }
 
 function requestNews(query) {
   const baseURL = 'https://newsapi.org/v2/'
@@ -47,7 +38,6 @@ function requestNews(query) {
     })
     .then(responceJson => {
       if (responceJson.totalResults === 0) {
-        //create an error message for the user
         console.log("there are 0 results, search something else")
       } else { 
         DATA = JSON.stringify(responceJson);
@@ -68,7 +58,6 @@ function formatPerams(perams) {
 
 function renderResults(DATA, query) {
   const dataObj = JSON.parse(DATA);
-  console.log(dataObj)
   $('.js-results-list').empty()
   .html(resultsHTML(dataObj));
   $('.js-results-header').empty()
@@ -99,18 +88,19 @@ function resultsHTML(dataObj) {
         <a class="full-article" href="${data[i].url}" target="_blank">Read full article..</a>
       </div>     
     </li>`)
-    }
-
-    return listItems;
   }
+
+  return listItems;
+}
   
-  function renderTime(timeCode) {
-    const timeDate = timeCode.split('T')
-    const date = timeDate[0].split('-')
-    const time = timeDate[1].split(':')
-    return (`${date[1]}/${date[2]}/${date[0]}`)
+function renderTime(timeCode) {
+  const timeDate = timeCode.split('T')
+  const date = timeDate[0].split('-')
+  const time = timeDate[1].split(':')
+  return (`${date[1]}/${date[2]}/${date[0]}`)
 }
 
+// check to see if the news article is missing discription or content
 function handleSentimentCheck(dataObj) {
   $('ul').off('click').on('click', '.sentiment-check', event => {
     const articleNum = event.target.id
@@ -152,6 +142,8 @@ function requestSentiment(line) {
     })
 }
 
+// decides if the article sentence long enough to be worth analyzing 
+// adds each sentence sentiment/magnitude and returns average
 function calculateSentiment(responceJson) {
   const sentences = responceJson.sentences
   const scoreArray = []
@@ -174,6 +166,7 @@ function calculateSentiment(responceJson) {
   return [sentimentNumber, magnitudeString]
 }
 
+// makes final sentiment decision
 function findSentimentNum(articleSentiment) {
   let sentimentResult = 0
   if (articleSentiment <= -.25) {
@@ -188,6 +181,7 @@ function findSentimentNum(articleSentiment) {
   return sentimentResult
 }
 
+// makes final magnitude decision
 function findMagnitude(articleMagnitude) {
   let magnitudeResult = Number
   if (articleMagnitude <= .25) {
