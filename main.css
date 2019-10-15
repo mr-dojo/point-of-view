@@ -41,6 +41,13 @@ span#and {
   font-size: 24px;
 }
 
+#header-image {
+  padding: 0;
+  height: 45px;
+  width: 45px;
+  
+}
+
 section.search-container {
   display: flex;
   justify-content: center;
@@ -59,7 +66,6 @@ input.search-submit {
   background-color: #70729E;
   border: 2px solid #FFFFFF;
   border-style: outset;
-  border-radius: 5px;
   color: #FFFFFF;
   background-image: url('images/magnifying-glass-1294834_1280.png');
   background-repeat: no-repeat;
@@ -156,7 +162,8 @@ i {
 }
 
 .footer {
-  font-size: 14px;
+  font-size: 13px;
+  margin-bottom: 15px;
 }
 
 a.full-article {
@@ -174,9 +181,7 @@ h2 {
 
 h3 {
   width: 100%;
-  text-align: center;
   padding: 15px;
-  text-align: left;
 }
 
 i {
