@@ -159,13 +159,19 @@ p.sentiment-check:hover {
   height: 0;
 }
 
+span#publish-date {
+  font-size: 13px;
+  font-weight: bold;
+}
+
 span {
   font-size: 16px;
   font-weight: bolder;
 }
 
-i {
+i.magnitude {
   font-size: 16px;
+  margin-right: 7px;
 }
 
 .footer {
