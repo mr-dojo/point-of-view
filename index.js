@@ -38,7 +38,7 @@ function requestNews(query) {
     })
     .then(responceJson => {
       if (responceJson.totalResults === 0) {
-        console.log("there are 0 results, search something else")
+        console.log('there are 0 results, search something else')
       } else { 
         DATA = JSON.stringify(responceJson);
         renderResults(DATA, query);
@@ -109,30 +109,29 @@ function handleSentimentCheck(dataObj) {
     if (descriptionString !== null && contentString !== null) {
       requestSentiment(descriptionString + contentString);
     } else if (descriptionString === null && contentString !== null) {
-      console.log("descriptionString is empty")
+      console.log('descriptionString is empty')
       requestSentiment(contentString);
     } else if (descriptionString !== null && contentString === null) {
-      console.log("contentString is empty")
+      console.log('contentString is empty')
       requestSentiment(descriptionString);
     }
     sentimentCheckId = articleNum
-    
   })
 }
 
 function requestSentiment(line) {
-  const apiKey = "AIzaSyB7d8Gu5HReab2u-UtuZTAxZYdnO4HELNc"
-  const apiEndpoint = "https://language.googleapis.com/v1/documents:analyzeSentiment?key=" + apiKey;
+  const apiKey = 'AIzaSyB7d8Gu5HReab2u-UtuZTAxZYdnO4HELNc'
+  const apiEndpoint = 'https://language.googleapis.com/v1/documents:analyzeSentiment?key=' + apiKey;
   const nlOptions = {
     'method': 'post',
     'contentType': 'application/json',
     'body': JSON.stringify({
       'document': {
-          'language': 'en',
-          'type': 'PLAIN_TEXT',
-          'content': line,
-        },
-        'encodingType': 'UTF8',
+        'language': 'en',
+        'type': 'PLAIN_TEXT',
+        'content': line,
+      },
+      'encodingType': 'UTF8',
     })
   };
   fetch(apiEndpoint, nlOptions)
@@ -176,7 +175,7 @@ function findSentimentNum(articleSentiment) {
   } else if (articleSentiment >= .25) {
     sentimentResult = 3
   } else {
-    console.log("error in sentiment calculations");
+    console.log('error in sentiment calculations');
   }
   return sentimentResult
 }
@@ -191,7 +190,7 @@ function findMagnitude(articleMagnitude) {
   } else if (articleMagnitude >= .4) {
     magnitudeResult = 2
   } else {
-    console.log("error in sentiment calculations");
+    console.log('error in sentiment calculations');
   }
   return magnitudeResult
 }
@@ -209,10 +208,10 @@ function renderSentiment(sentimentData) {
     $(`#${sentimentCheckId}`).html(`Article seems to be <i class="magnitude">${magnitudeText}</i><span>NEGATIVE</span>`)
     borderColor('strongly-negative');
   } else if (sentiment === 2 && magnitude === 0) {
-    $(`#${sentimentCheckId}`).html("Article seems to be <span>NEUTRAL</span></p>") 
+    $(`#${sentimentCheckId}`).html('Article seems to be <span>NEUTRAL</span></p>') 
     borderColor('neutral'); 
   } else if (sentiment === 2 && magnitude > 0) {
-    $(`#${sentimentCheckId}`).html("Article seems to be <span>MIXED</span>")
+    $(`#${sentimentCheckId}`).html('Article seems to be <span>MIXED</span>')
     borderColor('mixed');
   } else if (sentiment === 3 && magnitude === 1) {
     magnitudeText = 'slightly'
