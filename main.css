@@ -61,6 +61,7 @@ span#and {
 
 section.search-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 150px;
@@ -195,6 +196,11 @@ h1 {
 
 h2 {
   font-family: 'Playfair Display', serif;
+}
+
+h2#results-header {
+  height: 0;
+  text-indent: -9999999px;
 }
 
 h3 {
