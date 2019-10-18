@@ -163,6 +163,20 @@ p.sentiment-check:hover {
   cursor: pointer;
 }
 
+p.sentiment-clicked {
+  background-color: #70729E;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 10px;
+  border: 2px solid #FFFFFF;
+  border-radius: 5px;
+  border-style: outset;
+}
+
+p.sentiment-clicked:hover {
+  cursor: default;
+}
+
 .info-box {
   margin: 15px 0px;
 }
@@ -190,7 +204,7 @@ i.magnitude {
 
 .footer {
   font-size: 13px;
-  margin-bottom: 15px;
+  margin: 15px;
 }
 
 a.full-article {
