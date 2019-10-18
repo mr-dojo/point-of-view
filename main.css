@@ -96,6 +96,14 @@ input.search-input, input.search-submit {
   border-radius: 5px;
 }
 
+p.error-message {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #F2F2F2;
+  box-shadow: 0px 0px 20px rgb(173, 68, 68);
+  border-radius: 5px;
+}
+
 ul {
   list-style: none;
   padding: 0px;
@@ -215,6 +223,10 @@ i {
 .hidden {
   visibility: hidden;
   height: 0;
+}
+
+.display-none {
+  display: none;
 }
 
 
