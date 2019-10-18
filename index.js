@@ -40,8 +40,10 @@ function requestNews(query) {
     })
     .then(responceJson => {
       if (responceJson.totalResults === 0) {
+        renderError(query)
         console.log("there are 0 results, search something else");
       } else {
+        $('p.error-message').addClass('display-none');
         DATA = JSON.stringify(responceJson);
         renderResults(DATA, query);
       }
@@ -56,6 +58,11 @@ function formatPerams(perams) {
     .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(perams[key])}`)
     .join("&");
   return queryString;
+}
+
+function renderError(query) {
+  $('p.error-message').html(`There are 0 results for "${query}",  try something else`)
+  .removeClass('display-none');
 }
 
 function renderResults(DATA, query) {
@@ -209,35 +216,37 @@ function renderSentiment(sentimentData) {
   const magnitude = sentimentData[1];
   if (sentiment === 1 && magnitude === 1) {
     magnitudeText = "slightly";
-    $(`#${sentimentCheckId}`).html(
-      `Article seems to be <i class="magnitude">${magnitudeText}</i><span>NEGATIVE</span>`
-    );
+    $(`#${sentimentCheckId}`).replaceWith(`
+      <p class="js-sentiment-check sentiment-clicked">
+      Article seems to be <i class="magnitude">${magnitudeText}</i><span>NEGATIVE</span></p>`);
     borderColor("slightly-negative");
   } else if (sentiment === 1 && magnitude === 2) {
     magnitudeText = "strongly";
-    $(`#${sentimentCheckId}`).html(
-      `Article seems to be <i class="magnitude">${magnitudeText}</i><span>NEGATIVE</span>`
-    );
+    $(`#${sentimentCheckId}`).replaceWith(`
+      <p class="js-sentiment-check sentiment-clicked">
+      Article seems to be <i class="magnitude">${magnitudeText}</i><span>NEGATIVE</span></p>`);
     borderColor("strongly-negative");
   } else if (sentiment === 2 && magnitude === 0) {
-    $(`#${sentimentCheckId}`).html(
-      "Article seems to be <span>NEUTRAL</span></p>"
-    );
+    $(`#${sentimentCheckId}`).replaceWith(`
+      <p class="js-sentiment-check sentiment-clicked">
+      Article seems to be <span>NEUTRAL</span></p>`);
     borderColor("neutral");
   } else if (sentiment === 2 && magnitude > 0) {
-    $(`#${sentimentCheckId}`).html("Article seems to be <span>MIXED</span>");
+    $(`#${sentimentCheckId}`).replaceWith(`
+    <p class="js-sentiment-check sentiment-clicked">
+    Article seems to be <span>MIXED</span></p>`);
     borderColor("mixed");
   } else if (sentiment === 3 && magnitude === 1) {
     magnitudeText = "slightly";
-    $(`#${sentimentCheckId}`).html(
-      `Article seems to be <i class="magnitude">${magnitudeText}</i><span>POSITIVE</span>`
-    );
+    $(`#${sentimentCheckId}`).replaceWith(`
+    <p class="js-sentiment-check sentiment-clicked">
+    Article seems to be <i class="magnitude">${magnitudeText}</i><span>POSITIVE</span></p>`);
     borderColor("slightly-positive");
   } else if (sentiment === 3 && magnitude === 2) {
     magnitudeText = "strongly";
-    $(`#${sentimentCheckId}`).html(
-      `Article seems to be <i class="magnitude">${magnitudeText}</i><span>POSITIVE</span>`
-    );
+    $(`#${sentimentCheckId}`).replaceWith(`
+    <p class="js-sentiment-check sentiment-clicked">
+    Article seems to be <i class="magnitude">${magnitudeText}</i><span>POSITIVE</span></p>`);
     borderColor("strongly-positive");
   }
 }
