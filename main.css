@@ -71,6 +71,7 @@ section.search-container {
 form {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 input.search-input {
@@ -250,38 +251,28 @@ i {
 
 
 p.slightly-negative {
-  border: 2px solid #F7331D;
-  border-style: inset;
+  background-color: orangered;
 }
 
 p.strongly-negative {
-  border: 2px solid #8B0101;
-  border-style: inset;
+  background-color: red;
 
 }
 
 p.neutral {
-  border: 2px solid #FFFFFF;
-  border-style: inset;
-
+  background-color: grey;
 }
 
 p.mixed {
-  border: 2px solid #1BA8F0;
-  border-style: inset;
-
+  background-color: blue;
 }
 
 p.slightly-positive {
-  border: 2px solid #E7F7CB;
-  border-style: inset;
-
+  background-color: limegreen;
 }
 
 p.strongly-positive {
-  border: 2px solid green;
-  border-style: inset;
-
+  background-color: green;
 }
 
 @media only screen and (min-width: 300px) {

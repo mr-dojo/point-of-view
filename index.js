@@ -217,35 +217,35 @@ function renderSentiment(sentimentData) {
   if (sentiment === 1 && magnitude === 1) {
     magnitudeText = "slightly";
     $(`#${sentimentCheckId}`).replaceWith(`
-      <p class="js-sentiment-check sentiment-clicked">
+      <p id="${sentimentCheckId}"w class="js-sentiment-check sentiment-clicked">
       Article seems to be <i class="magnitude">${magnitudeText}</i><span>NEGATIVE</span></p>`);
     borderColor("slightly-negative");
   } else if (sentiment === 1 && magnitude === 2) {
     magnitudeText = "strongly";
     $(`#${sentimentCheckId}`).replaceWith(`
-      <p class="js-sentiment-check sentiment-clicked">
+      <p id="${sentimentCheckId}" class="js-sentiment-check sentiment-clicked">
       Article seems to be <i class="magnitude">${magnitudeText}</i><span>NEGATIVE</span></p>`);
     borderColor("strongly-negative");
   } else if (sentiment === 2 && magnitude === 0) {
     $(`#${sentimentCheckId}`).replaceWith(`
-      <p class="js-sentiment-check sentiment-clicked">
+      <p id="${sentimentCheckId}" class="js-sentiment-check sentiment-clicked">
       Article seems to be <span>NEUTRAL</span></p>`);
     borderColor("neutral");
   } else if (sentiment === 2 && magnitude > 0) {
     $(`#${sentimentCheckId}`).replaceWith(`
-    <p class="js-sentiment-check sentiment-clicked">
+    <p id="${sentimentCheckId}" class="js-sentiment-check sentiment-clicked">
     Article seems to be <span>MIXED</span></p>`);
     borderColor("mixed");
   } else if (sentiment === 3 && magnitude === 1) {
     magnitudeText = "slightly";
     $(`#${sentimentCheckId}`).replaceWith(`
-    <p class="js-sentiment-check sentiment-clicked">
+    <p id="${sentimentCheckId}" class="js-sentiment-check sentiment-clicked">
     Article seems to be <i class="magnitude">${magnitudeText}</i><span>POSITIVE</span></p>`);
     borderColor("slightly-positive");
   } else if (sentiment === 3 && magnitude === 2) {
     magnitudeText = "strongly";
     $(`#${sentimentCheckId}`).replaceWith(`
-    <p class="js-sentiment-check sentiment-clicked">
+    <p id="${sentimentCheckId}" class="js-sentiment-check sentiment-clicked">
     Article seems to be <i class="magnitude">${magnitudeText}</i><span>POSITIVE</span></p>`);
     borderColor("strongly-positive");
   }
